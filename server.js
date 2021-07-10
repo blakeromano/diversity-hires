@@ -1,18 +1,19 @@
 const express = require("express")
+const mongoose = require("mongoose")
 require("dotenv").config()
 
 //express app
 const app = express()
 
+//connect to mongoDB and listen for requests
+mongoose.connect(process.env.MONGODBSTRING, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => {app.listen(3000)})
+    .catch((err) => {console.log(err)})
 // register view engine
 app.set("view engine", "ejs")
 
 //set the public folder
 app.use(express.static('public'));
-
-// listen for requests
-app.listen(3000)
-
 
 // home page get
 app.get("/", (req, res) => {
