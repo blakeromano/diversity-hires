@@ -22,12 +22,21 @@ app.get("/", (req, res) => {
     res.redirect("/jobs")
 })
 
+// login page get
+app.get("/login", (req,res) => {
+    res.render("login", { title: "Login" })
+})
+// register page get
+app.get("/register", (req,res) => {
+    res.render("register", { title: "Sign-Up" })
+})
 
 //about page get
 app.get("/about", (req, res) => {
     res.render("about", { title: "About Us"})
 })
 
+// Jobs pages get
 app.get("/jobs", (req, res) => {
     Job.find().sort({ createdAt: -1 })
     .then(result => {
@@ -37,7 +46,7 @@ app.get("/jobs", (req, res) => {
         console.log(err)
     })
 })
-
+// Handle Posting New Job
 app.post("/jobs", (req, res) => {
     const job = new Job(req.body)
 

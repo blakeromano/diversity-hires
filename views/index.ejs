@@ -11,7 +11,9 @@
                     <h3><%=job.title %> </h3>
                 </div>
             <% }) %>
-        <% } %>
+        <% } else { %>
+            <h1 class="no-jobs-available">There are no Jobs Available Right Now! Check Back Later!</h1>
+        <% } %> 
     </div>
     <%- include("./partials/footer.ejs") %>
 </body>
