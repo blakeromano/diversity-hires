@@ -1,5 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const Job = require("./models/job")
 require("dotenv").config()
 
 //express app
@@ -12,22 +13,46 @@ mongoose.connect(process.env.MONGODBSTRING, { useNewUrlParser: true, useUnifiedT
 // register view engine
 app.set("view engine", "ejs")
 
-//set the public folder
+//Static files and Middleware
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }))
 
 // home page get
 app.get("/", (req, res) => {
-    res.render("index" , { title: "home" })
+    res.redirect("/jobs")
+})
+
+
+//about page get
+app.get("/about", (req, res) => {
+    res.render("about", { title: "About Us"})
+})
+
+app.get("/jobs", (req, res) => {
+    Job.find().sort({ createdAt: -1 })
+    .then(result => {
+        res.render("index" , { title: "All Jobs", jobs: result })
+    })
+    .catch(err => {
+        console.log(err)
+    })
+})
+
+app.post("/jobs", (req, res) => {
+    const job = new Job(req.body)
+
+    job.save()
+    .then((result) => {
+        res.redirect("/jobs")
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 })
 
 //new job posting get
 app.get("/jobs/post", (req, res) => {
     res.render("newjob", { title: "Post Job"})
-})
-
-//about page get
-app.get("/about", (req, res) => {
-    res.render("about", { title: "About Us"})
 })
 
 //404 page

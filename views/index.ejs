@@ -4,7 +4,14 @@
 <body>
     <%- include("./partials/nav.ejs") %> 
     <div class="content">
-
+        <% if (jobs.length > 0) { %>
+            <% jobs.forEach(job => { %>
+                <div class = "jobs">
+                    <h2><%=job.company  %> </h2>
+                    <h3><%=job.title %> </h3>
+                </div>
+            <% }) %>
+        <% } %>
     </div>
     <%- include("./partials/footer.ejs") %>
 </body>
