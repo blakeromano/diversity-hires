@@ -1,4 +1,7 @@
-const mongoose = require("mongoose")
+export {
+    Job,
+}
+import mongoose from "mongoose"
 const Schema = mongoose.Schema
 
 const jobSchema = new Schema({
@@ -14,7 +17,6 @@ const jobSchema = new Schema({
         type: String,
         required: true
     },
-    // bug with number of positions and app link for now
     numOfPositions: {
         type: String,
         required: true
@@ -26,5 +28,3 @@ const jobSchema = new Schema({
 }, { timestamps: true})
 
 const Job = mongoose.model("Job", jobSchema)
-
-module.exports = Job

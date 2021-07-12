@@ -1,11 +1,10 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const Job = require("./models/job")
-require("dotenv").config()
-
+import express from "express"
+import mongoose from "mongoose"
+import {Job} from "./models/job.js"
+import dotenv from "dotenv"
+const dotenvFile = dotenv.config()
 //express app
 const app = express()
-
 //connect to mongoDB and listen for requests
 mongoose.connect(process.env.MONGODBSTRING, { useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {app.listen(3000)})
