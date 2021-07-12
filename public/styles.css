@@ -57,21 +57,21 @@ h3{
   max-width: 400px;
   margin: 0 auto;
 }
-.create-blog input,
-.create-blog textarea{
+.create-job input,
+.create-job textarea{
   display: block;
   width: 100%;
   margin: 10px 0;
   padding: 8px;
 }
-.create-blog label{
+.create-job label{
   display: block;
   margin-top: 24px;
 }
 textarea{
   height: 120px;
 }
-.create-blog button{
+.create-job button{
   margin-top: 20px;
   background: crimson;
   color: white;

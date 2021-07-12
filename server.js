@@ -1,8 +1,11 @@
 import express from "express"
 import mongoose from "mongoose"
-import {Job} from "./models/job.js"
 import dotenv from "dotenv"
+import {userRoutes} from "./routes/userRoutes.js"
+import {jobRoutes} from "./routes/jobRoutes.js"
 const dotenvFile = dotenv.config()
+
+
 //express app
 const app = express()
 //connect to mongoDB and listen for requests
@@ -21,47 +24,16 @@ app.get("/", (req, res) => {
     res.redirect("/jobs")
 })
 
-// login page get
-app.get("/login", (req,res) => {
-    res.render("login", { title: "Login" })
-})
-// register page get
-app.get("/register", (req,res) => {
-    res.render("register", { title: "Sign-Up" })
-})
-
 //about page get
 app.get("/about", (req, res) => {
     res.render("about", { title: "About Us"})
 })
 
-// Jobs pages get
-app.get("/jobs", (req, res) => {
-    Job.find().sort({ createdAt: -1 })
-    .then(result => {
-        res.render("index" , { title: "All Jobs", jobs: result })
-    })
-    .catch(err => {
-        console.log(err)
-    })
-})
-// Handle Posting New Job
-app.post("/jobs", (req, res) => {
-    const job = new Job(req.body)
+// job routes
+app.use("/jobs", jobRoutes)
 
-    job.save()
-    .then((result) => {
-        res.redirect("/jobs")
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-})
-
-//new job posting get
-app.get("/jobs/post", (req, res) => {
-    res.render("newjob", { title: "Post Job"})
-})
+// user routes
+app.use("/user", userRoutes)
 
 //404 page
 app.use((req, res) => {

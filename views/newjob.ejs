@@ -6,22 +6,23 @@
     <div class="content">
       <div class="create-job content">
         <form action="/jobs" method="POST">
-          <label for="company">Company:</label>
+          <label for="company"><h2>Company:</h2></label>
           <input type="text" name="company" required>
           <br>
-          <label for="title">Job title:</label>
+          <label for="title"><h2>Job Title:</h2></label>
           <input type="text" id="title" name="title" required>
           <br>
-          <label for="numOfPositions">Number of Positions:</label>
+          <label for="numOfPositions"><h2>Number of Positions:</h2></label>
           <input type="number" name="numOfPositions" required>
           <br>
-          <label for="snippet">Job Description Snippet:</label>
+          <label for="snippet"><h2>Job Description Snippet:</h2></label>
           <input type="text" id="snippet" name="snippet" required>
           <br>
-          <label for="body">Job Description:</label>
+          <label for="body"><h2>Job Description:</h2></label>
+          <br>
           <textarea name="description" required></textarea>
           <br>
-          <label for="applicationLink">Link to Apply:</label>
+          <label for="applicationLink"><h2>Link to Apply:</h2></label>
           <input type="url" name="applicationLink" required>
           <br>
           <button type="submit">Submit</button>
