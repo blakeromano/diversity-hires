@@ -1,4 +1,12 @@
+import {Job} from "../models/job.js"
 
+export {
+    indexJobGet,
+    indexJobPost,
+    jobDetailsDelete,
+    jobDetailsGet,
+    jobPostGet,
+}
 
 function indexJobGet(req,res) {
     Job.find().sort({ createdAt: -1 })
@@ -40,4 +48,8 @@ function jobDetailsDelete(req,res) {
         res.redirect("/jobs")
     })
     .catch(err => console.log(err))
+}
+
+function jobPostGet(req,res) {
+    res.render("newjob", { title: "Post Job"})
 }
