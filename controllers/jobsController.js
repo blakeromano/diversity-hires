@@ -1,15 +1,6 @@
 
-import express from "express"
-import mongoose from "mongoose"
-import {Job} from "../models/job.js"
-import methodOverride from "method-override"
-const jobRoutes = express.Router()
 
-jobRoutes.use(methodOverride('_method'))
-
-
-// Jobs pages get
-jobRoutes.get("/", (req, res) => {
+function indexJobGet(req,res) {
     Job.find().sort({ createdAt: -1 })
     .then(result => {
         res.render("index" , { title: "All Jobs", jobs: result })
@@ -17,9 +8,9 @@ jobRoutes.get("/", (req, res) => {
     .catch(err => {
         console.log(err)
     })
-})
-// Handle Posting New Job
-jobRoutes.post("/", (req, res) => {
+}
+
+function indexJobPost(req,res) {
     const job = new Job(req.body)
     job.save()
     .then((result) => {
@@ -28,12 +19,9 @@ jobRoutes.post("/", (req, res) => {
     .catch((err) => {
         console.log(err)
     })
-})
+}
 
-//new job posting get
-jobRoutes.get("/post", (req, res) => {res.render("newjob", { title: "Post Job"})})
-//job specific page
-jobRoutes.get("/:id", (req, res) => {
+function jobDetailsGet(req,res) {
     const id = req.params.id
     Job.findById(id)
     .then(result => {
@@ -42,10 +30,9 @@ jobRoutes.get("/:id", (req, res) => {
     .catch(err=> {
         console.log(err)
     })
-})
+}
 
-//delete request for job
-jobRoutes.delete("/:id", (req,res) => {
+function jobDetailsDelete(req,res) {
     const id = req.params.id
 
     Job.findByIdAndDelete(id)
@@ -53,6 +40,4 @@ jobRoutes.delete("/:id", (req,res) => {
         res.redirect("/jobs")
     })
     .catch(err => console.log(err))
-})
-
-export {jobRoutes}
+}

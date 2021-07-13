@@ -6,10 +6,12 @@
     <div class="content">
         <% if (jobs.length > 0) { %>
             <% jobs.forEach(job => { %>
+                <a href="/jobs/<%= job._id %>">
                 <div class = "jobs">
                     <h2><%=job.company  %> </h2>
                     <h3><%=job.title %> </h3>
                 </div>
+                </a>
             <% }) %>
         <% } else { %>
             <h1 class="no-jobs-available">There are no Jobs Available Right Now! Check Back Later!</h1>

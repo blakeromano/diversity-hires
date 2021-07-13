@@ -82,6 +82,7 @@ textarea{
 }
 .jobs {
   border: black 3px solid;
+  margin-bottom: 10px;
 }
 .no-jobs-available {
   text-align: center;
@@ -105,4 +106,10 @@ textarea{
 }
 .login-page h4 {
   margin: 10px;
+}
+.job-desc {
+  margin: 15px 0 15px 0;
+}
+.delete:hover {
+  cursor: pointer;
 }

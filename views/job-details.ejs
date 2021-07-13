@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %> 
+<body>
+    <%- include("./partials/nav.ejs") %> 
+    <div class="content">
+        <h1><%= job.company %></h1>
+        <h2><%= job.title %> </h2>
+        <h3>Number of Postions Available: <%= job.numOfPositions %> </h3>
+        <p class="job-desc"><%= job.description %> </p>
+        <a target="_blank" href="<%= job.applicationLink %> "><h3>You can apply here!</h3></a>
+        <form method="POST" action="/jobs/<%= job._id %>?_method=DELETE">
+        <button type="submit">Delete Job</button>
+        </form>
+    </div>
+    <%- include("./partials/footer.ejs") %>
+</body>
+</html>
