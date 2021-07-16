@@ -2,7 +2,20 @@
 <link rel="stylesheet" href="/stylesheets/index-style.css">
 <%- include('./partials/nav') %>
 
-<main>
+<main class="container-fluid justify-content-center">
+    <div class="row floating-container">
+        <form action="/" method="post">
+            <div>
+                <input type="text" name="searchQuery" placeholder="Name of Company or Job Title">
+                <select name="searchParam" id="">
+                    <option value="company">Company</option>
+                    <option value="job">Job</option>
+                </select>
+
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
     <div class="row floating-container">
         <div class=" mx-4 col-6">
             <img class="img-fluid rounded"src="/images/index/man-1351761_1280.png" alt="A person being interviewed for a job">

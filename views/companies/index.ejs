@@ -1,0 +1,32 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/jobs/index-style.css">
+<%- include('../partials/nav') %>
+
+<main class="main-index">
+    <% let companyInterval = 0 %> 
+    <% if (companies.length > 0) { %>
+        <% companies.forEach(company => { %>
+            <% if (companyInterval % 2 === 0) { %>
+                <div class="row"> 
+            <% } %>
+            <div class="col-md-6 p-0">
+              <div class="card bg-dark card-dark">
+                  <a href="/company/<%= company._id %>">
+                      <div class = "card-body">
+                          <h2 class="card-title"><%=company.companyName  %> </h2>
+                          <h3 class="card-text"><%=company.industry %> </h3>
+                      </div>
+                  </a>
+                </div>
+            </div>
+        <% if (companyInterval % 2 === 1) { %>
+        </div> 
+        <% } %>
+        <% companyInterval ++ %> 
+    <% }) %>
+<% } else { %>
+    <h1 class="no-jobs-available">There are no Companies Hiring! Check Back Later!</h1>
+<% } %> 
+</main>
+
+<%- include('../partials/footer') %>

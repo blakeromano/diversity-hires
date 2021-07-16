@@ -32,7 +32,7 @@ const companySchema = new Schema({
     },
     companySize: {
         type: String,
-        enum: ["100", "500", "1000", "5000", "10000", "10001"],
+        enum: ["Small >100", "Medium 101-1000", "Large 1001-10000", "Extra-Large 10001+"],
         required: true,
     },
     industry: {

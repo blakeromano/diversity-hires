@@ -3,6 +3,7 @@
 <%- include('../partials/nav') %>
 
 <main>
+  <% if (job.userPosted.equals(user?.profile.id)) { %> 
     <form action="/jobs/<%= job._id %>?_method=PUT" method="POST">
       <h1>Edit your Job Posting</h1>
       <div class="form-floating mb-3">
@@ -29,6 +30,7 @@
         <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
       </div>
       </form>
+      <% } %> 
 </main>
 
 <%- include('../partials/footer') %>

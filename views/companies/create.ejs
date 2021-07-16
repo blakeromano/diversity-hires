@@ -1,0 +1,54 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/jobs/create-style.css">
+<%- include('../partials/nav') %>
+
+<main>
+  <% if (user) { %>
+    <form action="/companies" method="POST">
+      <h1>Post a new Company</h1>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="companyName" required>
+        <label for="companyName">Company Name:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="location" required>
+        <label for="location">Location:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="missionStatement" required>
+        <label for="missionStatement">Mission Statement:</label>
+      </div>
+      <div class="row">
+        <div class="form-floating col-6 mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="ceo" required>
+          <label for="ceo">CEO:</label>
+        </div>
+        <div class="form-floating col-6 mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="founded" required>
+          <label for="founded">Year Founded:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-floating col-6 mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="companySize" required>
+          <label for="companySize">Company Size:</label>
+        </div>
+        <div class="form-floating col-6 mb-3">
+          <input type="text" class="form-control" id="floatingInput" name="industry" required>
+          <label for="industry">Industry:</label>
+        </div>
+      </div>
+      <div class="form-floating mb-3" >
+        <textarea class="form-control" id="floatingInput" name="description"></textarea>
+        <label for="description">Description:</label>
+      </div>
+      <div class="btn-div">
+        <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
+      </div>
+      </form>
+   <% } else {%>
+    <h2>You must Login!</h2>
+    <% } %> 
+</main>
+
+<%- include('../partials/footer') %>

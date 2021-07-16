@@ -1,4 +1,4 @@
-
+import { Company } from "../models/company.js"
 
 export {
     newCompany as new,
@@ -11,13 +11,21 @@ export {
 }
 
 function newCompany (req, res) {
-
+    res.render("companies/create", { title: "New Company", user: req.user ? req.user : null })
 }
 function show (req, res) {
-
+    Company.findById(req.params.id)
+    .then(company => {
+        res.render("companies/show", { title: "Company Details", company: company, user: req.user ? req.user : null})
+    })
+    .catch(err => console.log(err))
 }
 function index (req, res) {
-
+    Company.find({})
+    .then(companies => {
+        res.render("companies/index", { title: "All Companies", companies: companies, user: req.user ? req.user : null })
+    })
+    .catch(err => console.log(err))
 }
 function deleteCompany (req, res) {
 
