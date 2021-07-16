@@ -38,5 +38,8 @@ function update (req, res) {
 
 }
 function create (req, res) {
-
+    const company = new Company(req.body)
+    company.save()
+    .then(result => res.redirect("/companies"))
+    .catch(err => console.log(err))
 }

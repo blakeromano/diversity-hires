@@ -4,12 +4,14 @@ export {
 
 import mongoose from "mongoose"
 import { Job } from "./job.js"
+import { Profile } from "./profile.js"
 const Schema = mongoose.Schema
 
 const companySchema = new Schema({
     companyName: {
         type: String,
         required: true,
+        unique: true,
     },
     location: {
         type: String,
@@ -42,7 +44,12 @@ const companySchema = new Schema({
     jobs: [{
         type: Schema.Types.ObjectId,
         ref: "Job"
-    }]
+    }],
+    userPosted: {
+        type: Schema.Types.ObjectId,
+        ref: Profile,
+        required: true,
+    },
 
 }, { timestamps: true})
 

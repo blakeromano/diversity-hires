@@ -1,0 +1,28 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/jobs/show-style.css">
+<%- include('../partials/nav') %>
+
+<main>
+    <div class="floating-container">
+        <h1><%= company.companyName %></h1>
+        <h2><%= company.industry %> </h2>
+        <h2><%= company.missionStatement %> </h2>
+        <h3>Located in: <%= company.location %> </h3>
+        <h3>Description of Company:</h3>
+        <p class="job-desc"><%= company.description %> </p>
+        <h3 class="">Current CEO: <%= company.ceo %> </h3>
+        <h3>Founded in: <%= company.founded %> </h3>
+        <%// if (company.userPosted.equals(user?.profile._id)) { %>
+            <div class="floating-container row ">
+                <form class="col-6 floating-container justify-content-center" action="/jobs/<%= company._id %>/edit" method="GET">
+                <button class="btn-lg" type="submit">Update Company</button>
+                </form>
+                <form class="floating-container col-6 justify-content-center"method="POST" action="/jobs/<%= company._id %>?_method=DELETE">
+                <button class="btn-lg" type="submit">Remove Company</button>
+                </form>
+            </div>
+        <% // } %>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>
