@@ -16,8 +16,11 @@
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link active"  href="/">Home</a></li>
         <li class="nav-item"><a class="nav-link active"  href="/about">About</a></li>
+        <li class="nav-item"><a class="nav-link active"  href="/jobs">Jobs</a></li>
+        <li class="nav-item"><a class="nav-link active"  href="/companies">Companies</a></li>
         <% if (user) { %>
-          <li class="nav-item"><a class="nav-link active"  href="/jobs/post">Post New Job</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/jobs/post">Post New Job</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/companies/post">Post a New Company</a></li>
         <% } %>
         <li class="nav-item">
           <% if (user) { %>
