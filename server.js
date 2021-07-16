@@ -1,48 +1,79 @@
-import express from "express"
-import mongoose from "mongoose"
-import dotenv from "dotenv"
-import * as indexController from "./controllers/indexController.js"
-import {userRoutes} from "./routes/userRoutes.js"
-import {jobRoutes} from "./routes/jobRoutes.js"
-import passport from "passport"
-import session from "express-session"
-const dotenvConfig = dotenv.config()
+import 'dotenv/config.js'
+import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import createError from 'http-errors'
+import session from 'express-session'
+import logger from 'morgan'
+import methodOverride from 'method-override'
+import passport from 'passport'
 
-//express app
+// create the express app
 const app = express()
-//connect to mongoDB and listen for requests
-mongoose.connect(process.env.MONGODBSTRING, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then((result) => {app.listen(3000)})
-    .catch((err) => {console.log(err)})
-// register view engine
-app.set("view engine", "ejs")
 
-//Static files and Middleware
-app.use(express.static('public'));
+// connect to MongoDB with mongoose
+import('./config/database.js')
+
+// load passport
+import('./config/passport.js')
+
+// require routes
+import { router as indexRouter } from './routes/index.js'
+import { router as authRouter } from './routes/auth.js'
+import { router as jobsRouter} from "./routes/jobs.js"
+
+// view engine setup
+app.set(
+  'views',
+  path.join(path.dirname(fileURLToPath(import.meta.url)), 'views')
+)
+app.set('view engine', 'ejs')
+
+// middleware
+app.use(methodOverride('_method'))
+app.use(logger('dev'))
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(
+  express.static(
+    path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')
+  )
+)
 
-app.use(session({
-    secret: "keyboard boop",
+// session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-}))
+    cookie: {
+      sameSite: 'lax',
+    }
+  })
+)
 
+// passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 
-// home page get
-app.get("/", (req, res) => {indexController.indexGet(req,res)})
+// router middleware
+app.use('/', indexRouter)
+app.use('/auth', authRouter)
+app.use("/jobs", jobsRouter)
 
-//about page get
-app.get("/about", (req, res) => {indexController.aboutGet(req, res)})
-
-// job routes
-app.use("/jobs", jobRoutes)
-
-// user routes
-app.use("/user", userRoutes)
-
-//404 page
-app.use((req, res) => {
-    res.status(404).render("404", { title: "404"})
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404))
 })
+
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
+
+  // render the error page
+  res.status(err.status || 500)
+  res.render('error')
+})
+
+export { app }

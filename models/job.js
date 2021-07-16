@@ -3,6 +3,7 @@ export {
 }
 
 import mongoose from "mongoose"
+import { Profile } from "../models/profile.js"
 const Schema = mongoose.Schema
 
 const jobSchema = new Schema({
@@ -12,7 +13,7 @@ const jobSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        default: "A description was not provided, please reach out to the company for more information about the position"
     },
     company: {
         type: String,
@@ -25,6 +26,11 @@ const jobSchema = new Schema({
     applicationLink: {
         type: String,
         required: true
+    },
+    userPosted: {
+        type: Schema.Types.ObjectId,
+        ref: Profile,
+        required: true,
     },
 }, { timestamps: true})
 

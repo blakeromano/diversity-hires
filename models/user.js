@@ -1,22 +1,18 @@
-import mongoose from "mongoose"
-
-const userSchema = new mongoose.Schema({
-    googleId: {
-        type: String,
-        required: true,
-    },
-    displayName: {
-        type: String,
-        required: true,
-    },
-    image: {
-        type: String,
-        required: true,
-    },
-})
-const User = mongoose.model("User", userSchema)
-
+import mongoose from 'mongoose'
 
 export {
-    User
+  User
 }
+
+const userSchema = new mongoose.Schema(
+  {
+    email: String,
+    googleId: String,
+    profile: {type: mongoose.Schema.Types.ObjectId, ref: "Profile"}
+  },
+  {
+    timestamps: true,
+  }
+)
+
+const User = mongoose.model('User', userSchema)

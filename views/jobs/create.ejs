@@ -1,0 +1,34 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/jobs/create-style.css">
+<%- include('../partials/nav') %>
+
+<main>
+    <form action="/jobs" method="POST">
+      <h1>Post a New Job</h1>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="company" required>
+        <label for="company">Company:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="title" required>
+        <label for="title">Job Title:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="numOfPositions" required>
+        <label for="numOfPositions">Number of Positions:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="applicationLink" required>
+        <label for="applicationLink">Link to Apply:</label>
+      </div>
+      <div class="form-floating mb-3" >
+        <textarea class="form-control" id="floatingInput" name="description"></textarea>
+        <label for="description">Job Description:</label>
+      </div>
+      <div class="btn-div">
+        <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
+      </div>
+      </form>
+</main>
+
+<%- include('../partials/footer') %>

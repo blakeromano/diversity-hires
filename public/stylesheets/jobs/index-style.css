@@ -1,0 +1,9 @@
+.card a {
+    text-decoration: none;
+}
+.card-body:hover {
+    background-color: white;
+}
+body{
+    background-color: rgb(33, 38, 41);
+}

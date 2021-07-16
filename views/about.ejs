@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    <%- include("./partials/head.ejs") %> 
-<body>
-    <%- include("./partials/nav.ejs") %> 
-    <div class="content">
+<%- include('./partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/about-style.css">
+<%- include('./partials/nav') %>
+
+<main>
+    <div class ="floating-container" >
         <h2>About Us!</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, facilis maiores delectus suscipit laboriosam vel molestias odio dolor aperiam fugiat labore rerum non cupiditate animi sequi beatae corporis!</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non culpa debitis provident assumenda iusto delectus, adipisci vel officia illum id ut asperiores cum. Minus ducimus explicabo quod sapiente itaque?</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid distinctio, sit in inventore temporibus repellat dolore natus ipsam sequi!</p>
     </div>
-    <%- include("./partials/footer.ejs") %>
-</body>
-</html>
+</main>
+
+<%- include('./partials/footer') %>
