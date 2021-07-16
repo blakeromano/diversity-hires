@@ -1,0 +1,32 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/index-style.css">
+<%- include('../partials/nav') %>
+
+<main class="container-fluid justify-content-center">
+    <% let jobInterval = 0 %> 
+    <% if (jobs.length > 0) { %>
+        <% jobs.forEach(job => { %>
+            <% if (jobInterval % 2 === 0) { %>
+                <div class="row"> 
+            <% } %>
+            <div class="col-md-6 p-0">
+              <div class="card bg-dark card-dark">
+                  <a href="/jobs/<%= job._id %>">
+                      <div class = "card-body">
+                          <h2 class="card-title"><%=job.company  %> </h2>
+                          <h3 class="card-text"><%=job.title %> </h3>
+                      </div>
+                  </a>
+                </div>
+            </div>
+        <% if (jobInterval % 2 === 1) { %>
+        </div> 
+        <% } %>
+        <% jobInterval ++ %> 
+    <% }) %>
+<% } else { %>
+    <h1 class="no-jobs-available">There are no Jobs matching your search</h1>
+<% } %> 
+</main>
+
+<%- include('../partials/footer') %>

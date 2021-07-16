@@ -1,13 +1,18 @@
-  <!-- <% if (!user) { %>
-    <link rel="stylesheet" href="/stylesheets/siwg.css">
-  <% } %> -->
 </head>
 <body class="d-flex flex-column h-100">
   <nav class="navbar navbar-expand-xlg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a href="/" class="navbar-brand">
+    <div class="col-11 container-fluid">
+      <a href="/" class="navbar-brand me-5">
         <h1>Diversity Hires</h1>
       </a>
+      <form class="d-flex ms-5" method="POST" action="/companies/search">
+        <input name="searchContent" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <select class="me-2" name="searchParam" id="">
+          <option value="jobs">Jobs</option>
+          <option value="companies">Companies</option>
+        </select>
+        <button class="btn btn-success" type="submit">Search</button>
+      </form>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

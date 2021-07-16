@@ -12,16 +12,17 @@
         <p class="job-desc"><%= company.description %> </p>
         <h3 class="">Current CEO: <%= company.ceo %> </h3>
         <h3>Founded in: <%= company.founded %> </h3>
-        <%// if (company.userPosted.equals(user?.profile._id)) { %>
+        <h3>Jobs Available at <%= company.companyName %>:</h3>
+        <% if (company.userPosted.equals(user?.profile._id)) { %>
             <div class="floating-container row ">
-                <form class="col-6 floating-container justify-content-center" action="/jobs/<%= company._id %>/edit" method="GET">
+                <form class="col-6 floating-container justify-content-center" action="/companies/<%= company._id %>/edit" method="GET">
                 <button class="btn-lg" type="submit">Update Company</button>
                 </form>
-                <form class="floating-container col-6 justify-content-center"method="POST" action="/jobs/<%= company._id %>?_method=DELETE">
+                <form class="floating-container col-6 justify-content-center"method="POST" action="/companies/<%= company._id %>?_method=DELETE">
                 <button class="btn-lg" type="submit">Remove Company</button>
                 </form>
             </div>
-        <% // } %>
+        <% } %>
     </div>
 </main>
 
