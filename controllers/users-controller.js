@@ -8,5 +8,16 @@ export {
 }
 
 function show (req, res) {
-    
+    User.findById(req.user)
+    .then(user => {
+        Profile.findById(user.profile)
+        .then(profile => {
+            console.log(profile)
+            res.render("users/show", {
+                title: "Profile Info",
+                profile: profile,
+                user: req.user ? req.user : null,
+            })
+        })
+    })
 }

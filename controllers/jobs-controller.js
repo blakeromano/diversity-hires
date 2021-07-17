@@ -35,7 +35,18 @@ function indexJobPost(req,res) {
         .then(company => {
             company[0].jobs.push(result._id)
             company[0].save()
-            .then(() => res.redirect("/jobs"))
+            .then(() => {
+                Profile.findById(req.user.profile)
+                .then(profile => {
+                    profile.jobsPosted.push(result._id)
+                    profile.save()
+                    .then(() => {
+                        res.redirect("/jobs")
+                    })
+                    .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
+            })
             .catch((err) => console.log(err))
         })
         .catch(err => console.log(err))
