@@ -1,5 +1,7 @@
 import { Company } from "../models/company.js"
 import { Job } from "../models/job.js"
+import { Review } from "../models/company.js"
+import { Profile } from "../models/profile.js"
 
 export {
     newCompany as new,
@@ -10,6 +12,7 @@ export {
     update,
     create,
     search,
+    createReview,
 }
 
 function newCompany (req, res) {
@@ -18,20 +21,13 @@ function newCompany (req, res) {
 function show (req, res) {
     Company.findById(req.params.id)
     .populate("jobs")
-    .exec()
-    .then(company => {
-        Job.find({_id: {$nin: company.jobs}})
-        .then(jobs => {
-            res.render("companies/show", {
-                title: "Company Details",
-                company: company,
-                jobs: jobs,
-                user: req.user ? req.user: null,
-            })
-        })
-        .catch(err => {
-            console.log(err)
-            res.render("error", {title: "Error", user: req.user ? req.user : null})
+    .populate("reviews.userPosted")
+    .then((company) => {
+        console.log(company.reviews[0].title)
+        res.render("companies/show", {
+            title: "Company Details",
+            company: company,
+            user: req.user ? req.user: null,
         })
     })
     .catch(err => {
@@ -116,4 +112,26 @@ function search(req, res) {
             res.render("error", {title: "Error", user: req.user ? req.user : null})
         })
     }
+}
+
+function createReview(req, res) {
+    req.body.userPosted = req.user.profile
+    if (req.body.rating === "") delete req.body.rating
+    req.body.rating = parseInt(req.body.rating)
+    Company.findById(req.params.id)
+    .then(company => {
+        company.reviews.push(req.body)
+        company.save()
+        .then(() => {
+            res.redirect(`/companies/${company._id}`)
+        })
+        .catch(err => {
+            console.log(err)
+            res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }

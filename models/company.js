@@ -1,5 +1,6 @@
 export {
     Company,
+    Review,
 }
 
 import mongoose from "mongoose"

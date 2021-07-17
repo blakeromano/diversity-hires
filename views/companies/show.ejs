@@ -16,6 +16,42 @@
         <% company.jobs.map(job => { %>
             <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
         <% }) %> 
+        <h2>Company Reviews:</h2>
+        <% if (company.reviews.length === 0) { %> 
+            <h4>There are no reviews for this company yet!</h4>
+        <% } else { %> 
+           <% company.reviews.map(review => { %>
+                <h3><%= review.title %> </h3>
+                <h4>Rating: <%= review.rating %></h4>
+                <h5><%= review.content %></h5>
+                <h5><%= review.userPosted.name %></h5>
+           <% }) %> 
+        <% } %> 
+        <h2>Have you worked for <%= company.companyName %>? Leave a Review!</h2>
+        <form action="/companies/<%= company._id %>/reviews" method="POST">
+            <h2>Post a Review</h2>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="title" required>
+                <label for="title">Review Title:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea type="text" class="form-control" id="floatingInput" name="content" required></textarea>
+                <label for="content">Review Content:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select name="rating" id="">
+                    <option value="">Select a Rating</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+              </div>            
+            <div class="btn-div">
+              <button class="btn btn-lg btn-secondary" type="submit">Submit Review</button>
+            </div>
+            </form>
         <% if (company.userPosted.equals(user?.profile._id)) { %>
             <div class="floating-container row ">
                 <form class="col-6 floating-container justify-content-center" action="/companies/<%= company._id %>/edit" method="GET">
