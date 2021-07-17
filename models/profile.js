@@ -9,14 +9,14 @@ const profileSchema = new mongoose.Schema({
   avatar: String,
   hiringStatus: {
     type: String,
-    enum: ["Hiring", "Not Hiring", "Actively Job Seeking", "Not Actively Job Seeking"],
+    enum: ["Hiring", "Not Hiring", "Actively Job Seeking", "Not Actively Job Seeking", ""],
   },
   location: String,
   industry: String,
   phoneNumber: Number,
   relocation: {
     type: String,
-    enum: ["Yes", "No"],
+    enum: ["Yes", "No", ""],
   },
   additionalInfo: String,
   website: String,

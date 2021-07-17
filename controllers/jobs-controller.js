@@ -40,10 +40,10 @@ function indexJobPost(req,res) {
                 .then(profile => {
                     profile.jobsPosted.push(result._id)
                     profile.save()
-                    .then(() => {
+                    // .then(() => {
                         res.redirect("/jobs")
-                    })
-                    .catch(err => console.log(err))
+                    // })
+                    // .catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
             })
