@@ -26,6 +26,7 @@
         <% if (user) { %>
           <li class="nav-item"><a class="nav-link active" href="/jobs/post">Post New Job</a></li>
           <li class="nav-item"><a class="nav-link active" href="/companies/new">Post a New Company</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/users/<%= user._id %>">Profile</a></li>
         <% } %>
         <li class="nav-item">
           <% if (user) { %>

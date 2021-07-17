@@ -20,9 +20,9 @@ import('./config/passport.js')
 // require routes
 import { router as indexRouter } from './routes/index.js'
 import { router as authRouter } from './routes/auth.js'
-import { router as jobsRouter} from "./routes/jobs.js"
-import { router as companiesRouter} from "./routes/companies.js"
-
+import { router as jobsRouter } from "./routes/jobs.js"
+import { router as companiesRouter } from "./routes/companies.js"
+import { router as usersRouter } from "./routes/users.js"
 // view engine setup
 app.set(
   'views',
