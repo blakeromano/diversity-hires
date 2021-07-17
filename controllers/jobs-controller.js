@@ -1,6 +1,7 @@
 import {Job} from "../models/job.js"
 import { Profile } from "../models/profile.js"
 import { User } from "../models/user.js"
+import { Company } from "../models/company.js"
 
 export {
     indexJobGet,
@@ -30,7 +31,14 @@ function indexJobPost(req,res) {
     const job = new Job(req.body)
     job.save()
     .then((result) => {
-        res.redirect("/jobs")
+        Company.find({ companyName: result.company})
+        .then(company => {
+            company[0].jobs.push(result._id)
+            company[0].save()
+            .then(() => res.redirect("/jobs"))
+            .catch((err) => console.log(err))
+        })
+        .catch(err => console.log(err))
     })
     .catch((err) => {
         console.log(err)
@@ -59,7 +67,11 @@ function jobDetailsDelete(req,res) {
 }
 
 function jobPostGet(req,res) {
-    res.render("jobs/create", { title: "Post Job", user: req.user ? req.user : null })
+    Company.find({})
+    .then(companies => {
+        res.render("jobs/create", { title: "Post Job", companies: companies, user: req.user ? req.user : null })
+    })
+    .catch(err => console.log(err))
 }
 
 function jobEdit(req, res) {
