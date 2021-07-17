@@ -28,6 +28,9 @@ function indexJobPost(req,res) {
     if (req.body.description === "") {
         delete req.body.description
     }
+    if (req.body.company === "") {
+        delete req.body.company
+    }
     const job = new Job(req.body)
     job.save()
     .then((result) => {
@@ -40,10 +43,7 @@ function indexJobPost(req,res) {
                 .then(profile => {
                     profile.jobsPosted.push(result._id)
                     profile.save()
-                    // .then(() => {
-                        res.redirect("/jobs")
-                    // })
-                    // .catch(err => console.log(err))
+                    res.redirect("/jobs")
                 })
                 .catch(err => console.log(err))
             })
@@ -80,7 +80,17 @@ function jobDetailsDelete(req,res) {
 function jobPostGet(req,res) {
     Company.find({})
     .then(companies => {
-        res.render("jobs/create", { title: "Post Job", companies: companies, user: req.user ? req.user : null })
+        Profile.findById(req.user.profile)
+        .then(profile => {
+            res.render("jobs/create", {
+                 title: "Post Job", 
+                 companies: companies, 
+                 user: req.user ? req.user : null,
+                 profile: profile
+                })
+
+        })
+        .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
 }

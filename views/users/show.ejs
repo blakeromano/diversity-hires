@@ -6,9 +6,9 @@
     <div class="floating-container">
         <img src="<%= profile.avatar %> " alt="...">
         <h1><%= profile.name %></h1>
-        <h3><a href="mailto:<%= userProfile.email %>"><%= userProfile.email %></a></h3>
+        <h3><a target="_blank" href="mailto:<%= userProfile.email %>"><%= userProfile.email %></a></h3>
         <% if (profile.website) { %>
-            <h4>Website: <a href="<%= profile.website %>"><%= profile.website %></a></h4>
+            <h4>Website: <a target="_blank" href="<%= profile.website %>"><%= profile.website %></a></h4>
         <% } %>
         <% if (profile.hiringStatus) { %>
             <h4>Hiring Status: <%= profile.hiringStatus %></h4>
@@ -24,6 +24,9 @@
         <% } %>
         <% if (profile.relocation) { %>
             <h4>Willing to Relocate: <%= profile.relocation %></h4>
+        <% } %>
+        <% if (profile.company) { %>
+            <h4>Company: <%= profile.company %></h4>
         <% } %>
         <% if (profile.additionalInfo) { %>
             <h4>Additional Information: <%= profile.additionalInfo %></h4>

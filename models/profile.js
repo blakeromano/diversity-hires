@@ -11,6 +11,7 @@ const profileSchema = new mongoose.Schema({
     type: String,
     enum: ["Hiring", "Not Hiring", "Actively Job Seeking", "Not Actively Job Seeking", ""],
   },
+  company: String,
   location: String,
   industry: String,
   phoneNumber: Number,
