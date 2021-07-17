@@ -26,11 +26,20 @@ function show (req, res) {
                     user: req.user ? req.user: null,
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                res.render("error", {title: "Error", user: req.user ? req.user : null})
+            })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 
 function edit (req, res) {
@@ -47,9 +56,15 @@ function edit (req, res) {
                 user: req.user ? req.user: null,
             })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 
 function update (req, res) {
@@ -59,7 +74,13 @@ function update (req, res) {
         .then(profile => {
             res.redirect(`/users/${user._id}`)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }

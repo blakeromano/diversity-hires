@@ -20,6 +20,7 @@ function indexJobGet(req,res) {
     })
     .catch(err => {
         console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
     })
 }
 
@@ -45,14 +46,22 @@ function indexJobPost(req,res) {
                     profile.save()
                     res.redirect("/jobs")
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                    res.render("error", {title: "Error", user: req.user ? req.user : null})
+                })
             })
-            .catch((err) => console.log(err))
-        })
-        .catch(err => console.log(err))
-    })
-    .catch((err) => {
+            .catch(err => {
+                console.log(err)
+                res.render("error", {title: "Error", user: req.user ? req.user : null})
+            })        })
+        .catch(err => {
+            console.log(err)
+            res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })    })
+    .catch(err => {
         console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
     })
 }
 
@@ -62,8 +71,9 @@ function jobDetailsGet(req,res) {
     .then(result => {
         res.render("jobs/show", { title: "Job Details", job: result, user: req.user ? req.user : null })
     })
-    .catch(err=> {
+    .catch(err => {
         console.log(err)
+        res.render("error", {title: "Error",user: req.user ? req.user : null})
     })
 }
 
@@ -74,7 +84,10 @@ function jobDetailsDelete(req,res) {
     .then(result => {
         res.redirect("/jobs")
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 
 function jobPostGet(req,res) {
@@ -90,9 +103,15 @@ function jobPostGet(req,res) {
                 })
 
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 
 function jobEdit(req, res) {
@@ -100,14 +119,19 @@ function jobEdit(req, res) {
     .then(job => {
         res.render("jobs/edit", { title: "Edit Job", job: job, user: req.user ? req.user : null })
     })
-    .catch()
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 function jobUpdate(req, res) {
     if (req.body.description === "") {
         delete req.body.description
     }
-    console.log(req.body)
     Job.findByIdAndUpdate(req.params.id, req.body, {new:true})
     .then(result => res.redirect(`/jobs/${req.params.id}`))
-    .catch(err => console.log(err))    
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })   
 }

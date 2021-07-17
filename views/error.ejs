@@ -1,3 +1,9 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<%- include('./partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/index-style.css">
+<%- include('./partials/nav') %>
+
+<main class="container-fluid justify-content-center">
+    There was an error! Please navigate back to the page!
+</main>
+
+<%- include('./partials/footer') %>
