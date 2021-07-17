@@ -7,6 +7,28 @@ import { Job } from "./job.js"
 import { Profile } from "./profile.js"
 const Schema = mongoose.Schema
 
+const reviewSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    content: {
+        type: String,
+        required: true,
+    },
+    rating: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5,
+    },
+    userPosted: {
+        type: Schema.Types.ObjectId,
+        ref: Profile,
+        required: true,
+    },
+})
+
 const companySchema = new Schema({
     companyName: {
         type: String,
@@ -41,6 +63,7 @@ const companySchema = new Schema({
         type: String,
         required: true,
     },
+    reviews: [reviewSchema],
     jobs: [{
         type: Schema.Types.ObjectId,
         ref: "Job"
@@ -54,3 +77,4 @@ const companySchema = new Schema({
 }, { timestamps: true})
 
 const Company = mongoose.model("Company", companySchema)
+const Review = mongoose.model("Review", reviewSchema)
