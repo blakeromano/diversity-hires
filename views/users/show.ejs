@@ -6,14 +6,39 @@
     <div class="floating-container">
         <img src="<%= profile.avatar %> " alt="...">
         <h1><%= profile.name %></h1>
-        <h3><%= user.email %></h3>
-        <%  %>
+        <h3><a href="mailto:<%= userProfile.email %>"><%= userProfile.email %></a></h3>
+        <% if (profile.website) { %>
+            <h4>Website: <a href="<%= profile.website %>"><%= profile.website %></a></h4>
+        <% } %>
+        <% if (profile.hiringStatus) { %>
+            <h4>Hiring Status: <%= profile.hiringStatus %></h4>
+        <% } %>
+        <% if (profile.location) { %>
+            <h4>Location: <%= profile.location %></h4>
+        <% } %>
+        <% if (profile.industry) { %>
+            <h4>Industry: <%= profile.industry %></h4>
+        <% } %>
+        <% if (profile.phoneNumber) { %>
+            <h4>Phone Number: <%= profile.phoneNumber %></h4>
+        <% } %>
+        <% if (profile.relocation) { %>
+            <h4>Willing to Relocate: <%= profile.relocation %></h4>
+        <% } %>
+        <% if (profile.additionalInfo) { %>
+            <h4>Additional Information: <%= profile.additionalInfo %></h4>
+        <% } %>
+        <h3>Jobs Posted by the User:</h3>
+        <% profile.jobsPosted.map(job => { %>
+            <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
+        <% }) %> 
+        <% if (profile._id.equals(user?.profile._id)) {%> 
             <div class="floating-container row ">
-                <form class="col-6 floating-container justify-content-center" action="/jobs/<%= %>/edit" method="GET">
+                <form class="col-6 floating-container justify-content-center" action="/users/<%= user._id %>/edit" method="GET">
                 <button class="btn-lg" type="submit">Update Profile</button>
                 </form>
             </div>
-        <% %>
+        <% } %>
     </div>
 </main>
 

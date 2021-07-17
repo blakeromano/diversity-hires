@@ -1,0 +1,49 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/jobs/create-style.css">
+<%- include('../partials/nav') %>
+
+<main>
+  <% if (profile._id.equals(user?.profile.id)) { %> 
+    <form action="/users/<%= user._id %>?_method=PUT" method="POST">
+      <h1>Edit your Profile:</h1>
+      <div class="form-floating mb-3">
+        <input value="<%= profile.location %>"type="text" class="form-control" id="floatingInput" name="location" >
+        <label for="location">Location:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input value="<%= profile.industry %>" type="text" class="form-control" id="floatingInput" name="industry" >
+        <label for="industry">Industry:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input value="<%= profile.phoneNumber %>" type="number" class="form-control" id="floatingInput" name="phoneNumber" >
+        <label for="phoneNumber">Phone Number:</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input value="<%= profile.website %>" type="text" class="form-control" id="floatingInput" name="website" >
+        <label for="website">Website:</label>
+      </div>
+      <div class="form-floating mb-3" >
+        <textarea class="form-control" id="floatingInput" name="additionalInfo"><%= profile.additionalInfo %></textarea>
+        <label for="additionalInfo">Additional Information:</label>
+      </div>
+      <select name="hiringStatus" id="">
+          <option value="">Select One</option>
+          <option value="Hiring">Hiring</option>
+          <option value="Not Hiring">Not Hiring</option>
+          <option value="Actively Job Seeking">Actively Job Seeking</option>
+          <option value="Not Actively Job Seeeking">Not Actively Job Seeking</option>
+      </select>
+      <label for="">Willing to Relocate?</label>
+      <select name="relocation" id="">
+          <option value="">Select One</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+      </select>
+      <div class="btn-div">
+        <button class="btn btn-lg btn-secondary" type="submit">Submit</button>
+      </div>
+      </form>
+      <% } %> 
+</main>
+
+<%- include('../partials/footer') %>
