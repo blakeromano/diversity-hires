@@ -17,8 +17,19 @@ function newCompany (req, res) {
 }
 function show (req, res) {
     Company.findById(req.params.id)
+    .populate("jobs")
+    .exec()
     .then(company => {
-        res.render("companies/show", { title: "Company Details", company: company, user: req.user ? req.user : null})
+        Job.find({_id: {$nin: company.jobs}})
+        .then(jobs => {
+            res.render("companies/show", {
+                title: "Company Details",
+                company: company,
+                jobs: jobs,
+                user: req.user ? req.user: null,
+            })
+        })
+        .catch(err => console.log(err))
     })
     .catch(err => console.log(err))
 }

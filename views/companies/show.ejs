@@ -13,6 +13,9 @@
         <h3 class="">Current CEO: <%= company.ceo %> </h3>
         <h3>Founded in: <%= company.founded %> </h3>
         <h3>Jobs Available at <%= company.companyName %>:</h3>
+        <% company.jobs.map(job => { %>
+            <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
+        <% }) %> 
         <% if (company.userPosted.equals(user?.profile._id)) { %>
             <div class="floating-container row ">
                 <form class="col-6 floating-container justify-content-center" action="/companies/<%= company._id %>/edit" method="GET">
