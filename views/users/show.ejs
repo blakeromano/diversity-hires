@@ -175,7 +175,7 @@
                         <h6><%= ed.school %></h6>
                         <p>Degree: <%= ed.degree %> </p>
                         <p>Field of Study: <%= ed.fieldOfStudy %></p>
-                        <p>Duration: <%= ed.start %> - <%= ed.end %> </p>
+                        <p>Duration: <%= ed.start %> to <%= ed.end %> </p>
                         <p>Description: <%= ed.description %> </p>
                     </div>
                     <% if (profile._id.equals(user?.profile._id)) { %>
@@ -196,7 +196,7 @@
                 <div class="row">
                     <div class="col-10">
                         <h6><%= exp.company %> as a <%= exp.position %></h6>
-                        <p>Duration: <%= exp.start %> - <%= exp.end %> </p>
+                        <p>Duration: <%= exp.start %> to <%= exp.end %> </p>
                         <p>Description: <%= exp.description %> </p>
                     </div>
                     <% if (profile._id.equals(user?.profile._id)) { %>
