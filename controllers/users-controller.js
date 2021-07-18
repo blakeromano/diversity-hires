@@ -10,9 +10,6 @@ export {
     newSkill,
     newExperience,
     newEducation,
-    editEducation,
-    editExperience,
-    editSkill,
     deleteEducation,
     deleteSkill,
     deleteExperience,
@@ -147,17 +144,23 @@ function newExperience(req, res) {
     })
 }
 
-function editSkill (req, res) {
-
-}
-function editExperience (req, res) {
-    
-}
-function editEducation (req, res) {
-    
-}
 function deleteSkill (req, res) {
-    
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        console.log(req.params.id)
+        const skill = profile.skills.filter((skill) => {
+            return req.params.id === skill._id
+        })
+        console.log(skill)
+        const skillIndex = profile.skills.indexOf(skill)
+        console.log(skillIndex)
+        profile.skills.splice(skillIndex, 1)
+        res.redirect(`/users/${req.user._id}`)
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 function deleteEducation (req, res) {
     

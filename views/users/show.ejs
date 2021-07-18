@@ -148,32 +148,98 @@
         <% if (profile.additionalInfo) { %>
             <h4>Additional Information: <%= profile.additionalInfo %></h4>
         <% } %>
+        <% if (profile.skills.length) { %>
+            <h4>Skills:</h4>
+            <% profile.skills.forEach(skill => { %>
+                <div class="row">
+                    <div class="col-10">
+                        <p><%= skill.name %>: <%= skill.profeciency %>  </p>
+                    </div>
+                    <% if (profile._id.equals(user?.profile._id)) { %>
+                        <div class="col-2">
+                        <form action="/users/<%= user._id %>/skills/<%= skill._id %>?_method=DELETE" method="post">
+                            <button type="submit" class="button btn-danger">
+                                X
+                            </button>
+                            </form> 
+                        </div>
+                    <% } %>
+                </div>
+            <% }) %>
+        <% } %>
+        <% if (profile.education.length) { %>
+            <h4>Education:</h4>
+            <% profile.education.forEach(ed => { %>
+                <div class="row">
+                    <div class="col-10">
+                        <h6><%= ed.school %></h6>
+                        <p>Degree: <%= ed.degree %> </p>
+                        <p>Field of Study: <%= ed.fieldOfStudy %></p>
+                        <p>Duration: <%= ed.start %> - <%= ed.end %> </p>
+                        <p>Description: <%= ed.description %> </p>
+                    </div>
+                    <% if (profile._id.equals(user?.profile._id)) { %>
+                        <div class="col-2">
+                            <form action="/users/<%= user._id %>/education/<%= ed._id %>?_method=DELETE" method="post">
+                            <button type="submit" class="button btn-danger">
+                                X
+                            </button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            <% }) %>
+        <% } %>
+        <% if (profile.experiences.length) { %>
+            <h4>Experiences:</h4>
+            <% profile.experiences.forEach(exp => { %>
+                <div class="row">
+                    <div class="col-10">
+                        <h6><%= exp.company %> as a <%= exp.position %></h6>
+                        <p>Duration: <%= exp.start %> - <%= exp.end %> </p>
+                        <p>Description: <%= exp.description %> </p>
+                    </div>
+                    <% if (profile._id.equals(user?.profile._id)) { %>
+                        <div class="col-2">
+                        <form action="/users/<%= user._id %>/experiences/<%= exp._id %>?_method=DELETE" method="post">
+                            <button type="submit" class="button btn-danger">
+                                X
+                            </button>
+                            </form> 
+                        </div>
+                    <% } %>
+                </div>
+            <% }) %>
+        <% } %>
         <% if (profile._id.equals(user?.profile._id)) {%> 
-        <div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkill">
-                Add Skill
-            </button>          
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEducation">
-                Add Education
-            </button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExperience">
-                Add Experience
-            </button>               
+        <div class="d-flex flex-row justify-content-center">
+            <div class="col-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkill">
+                    Add Skill
+                </button>          
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEducation">
+                    Add Education
+                </button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExperience">
+                    Add Experience
+                </button>
+            </div>
+            <div class="col-3">
+                <form class="floating-container justify-content-center" action="/users/<%= user._id %>/edit" method="GET">
+                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                </form>               
+            </div>
         </div>
         <% } %> 
-        <form action="/users/<%=  %> " method="post"></form>
         <% if (profile.hiringStatus === "Hiring" || profile.hiringStatus === "") { %>
             <h3>Jobs Posted by the User:</h3>
             <% profile.jobsPosted.map(job => { %>
                 <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
             <% }) %> 
-        <% } %>
-        <% if (profile._id.equals(user?.profile._id)) {%> 
-            <div class="floating-container row ">
-                <form class="col-6 floating-container justify-content-center" action="/users/<%= user._id %>/edit" method="GET">
-                <button class="btn-lg" type="submit">Update Profile</button>
-                </form>
-            </div>
         <% } %>
     </div>
 </main>

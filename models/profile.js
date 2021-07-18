@@ -55,10 +55,6 @@ const experienceSchema = new mongoose.Schema({
   end: {
     type: String,
   },
-  currentJob: {
-    type: Boolean,
-    required: true,
-  },
   description: String,
 })
 
