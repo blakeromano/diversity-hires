@@ -23,7 +23,6 @@ function show (req, res) {
     .populate("jobs")
     .populate("reviews.userPosted")
     .then((company) => {
-        console.log(company.reviews[0].title)
         res.render("companies/show", {
             title: "Company Details",
             company: company,
