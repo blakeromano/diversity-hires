@@ -147,15 +147,11 @@ function newExperience(req, res) {
 function deleteSkill (req, res) {
     Profile.findById(req.user.profile)
     .then(profile => {
-        console.log(req.params.id)
-        const skill = profile.skills.filter((skill) => {
-            return req.params.id === skill._id
+        profile.skills.remove({_id: req.params.id})
+        profile.save()
+        .then(() => {
+            res.redirect(`/users/${req.user._id}`)
         })
-        console.log(skill)
-        const skillIndex = profile.skills.indexOf(skill)
-        console.log(skillIndex)
-        profile.skills.splice(skillIndex, 1)
-        res.redirect(`/users/${req.user._id}`)
     })
     .catch(err => {
         console.log(err)
@@ -163,8 +159,30 @@ function deleteSkill (req, res) {
     })
 }
 function deleteEducation (req, res) {
-    
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        profile.education.remove({_id: req.params.id})
+        profile.save()
+        .then(() => {
+            res.redirect(`/users/${req.user._id}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 function deleteExperience (req, res) {
-    
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        profile.experiences.remove({_id: req.params.id})
+        profile.save()
+        .then(() => {
+            res.redirect(`/users/${req.user._id}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }

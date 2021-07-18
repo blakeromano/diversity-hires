@@ -123,7 +123,7 @@
     <div class="floating-container">
         <img src="<%= profile.avatar %> " alt="...">
         <h1><%= profile.name %></h1>
-        <h3><a target="_blank" href="mailto:<%= userProfile.email %>"><%= userProfile.email %></a></h3>
+        <h3>Email: <a target="_blank" href="mailto:<%= userProfile.email %>"><%= userProfile.email %></a></h3>
         <% if (profile.website) { %>
             <h4>Website: <a target="_blank" href="<%= profile.website %>"><%= profile.website %></a></h4>
         <% } %>
@@ -235,7 +235,7 @@
             </div>
         </div>
         <% } %> 
-        <% if (profile.hiringStatus === "Hiring" || profile.hiringStatus === "") { %>
+        <% if (profile.hiringStatus === "Hiring") { %>
             <h3>Jobs Posted by the User:</h3>
             <% profile.jobsPosted.map(job => { %>
                 <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>

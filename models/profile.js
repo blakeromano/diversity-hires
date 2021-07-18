@@ -68,7 +68,7 @@ const profileSchema = new mongoose.Schema({
   company: String,
   location: String,
   industry: String,
-  phoneNumber: Number,
+  phoneNumber: String,
   relocation: {
     type: String,
     enum: ["Yes", "No", ""],
