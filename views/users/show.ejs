@@ -31,9 +31,8 @@
         <% if (profile.additionalInfo) { %>
             <h4>Additional Information: <%= profile.additionalInfo %></h4>
         <% } %>
-        <button id="add-skill">Add Skill</button>
-        <button id="add-education">Add Education</button>
-        <button id="add-experience">Add Previous Experience</button>
+            
+        <form action="/users/<%=  %> " method="post"></form>
         <% if (profile.hiringStatus === "Hiring" || profile.hiringStatus === "") { %>
             <h3>Jobs Posted by the User:</h3>
             <% profile.jobsPosted.map(job => { %>
@@ -50,5 +49,4 @@
     </div>
 </main>
 
-<script src="/javascript/users/show.js"></script>
 <%- include('../partials/footer') %>
