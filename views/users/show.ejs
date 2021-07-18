@@ -31,10 +31,15 @@
         <% if (profile.additionalInfo) { %>
             <h4>Additional Information: <%= profile.additionalInfo %></h4>
         <% } %>
-        <h3>Jobs Posted by the User:</h3>
-        <% profile.jobsPosted.map(job => { %>
-            <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
-        <% }) %> 
+        <button id="add-skill">Add Skill</button>
+        <button id="add-education">Add Education</button>
+        <button id="add-experience">Add Previous Experience</button>
+        <% if (profile.hiringStatus === "Hiring" || profile.hiringStatus === "") { %>
+            <h3>Jobs Posted by the User:</h3>
+            <% profile.jobsPosted.map(job => { %>
+                <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
+            <% }) %> 
+        <% } %>
         <% if (profile._id.equals(user?.profile._id)) {%> 
             <div class="floating-container row ">
                 <form class="col-6 floating-container justify-content-center" action="/users/<%= user._id %>/edit" method="GET">
@@ -45,4 +50,5 @@
     </div>
 </main>
 
+<script src="/javascript/users/show.js"></script>
 <%- include('../partials/footer') %>

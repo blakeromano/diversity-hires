@@ -4,6 +4,19 @@ export {
   Profile
 }
 
+const skillSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  profeciency: {
+    type: String,
+    required: true,
+    enum: [">1 year", "1-5 years", "5-10 years", "10+ years"],
+  },
+})
+
 const profileSchema = new mongoose.Schema({
   name: String,
   avatar: String,
@@ -21,6 +34,7 @@ const profileSchema = new mongoose.Schema({
   },
   additionalInfo: String,
   website: String,
+  skills: [skillSchema],
   jobsPosted: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Job"

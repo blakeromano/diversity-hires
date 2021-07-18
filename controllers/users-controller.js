@@ -7,6 +7,7 @@ export {
     show,
     edit,
     update,
+    newSkill,
 }
 
 function show (req, res) {
@@ -77,6 +78,24 @@ function update (req, res) {
         .catch(err => {
             console.log(err)
             res.render("error", {title: "Error", user: req.user ? req.user : null})
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
+}
+
+function newSkill (req, res) {
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key]
+    }
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        profile.skills.push(req.body)
+        profile.save()
+        .then(() => {
+            res.redirect(`/users/${req.user._id}`)
         })
     })
     .catch(err => {
