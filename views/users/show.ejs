@@ -2,6 +2,123 @@
 <link rel="stylesheet" href="/stylesheets/jobs/show-style.css">
 <%- include('../partials/nav') %>
 
+<div class="modal" id="addSkill" tabindex="-1" aria-labelledby="addSkill" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addSkill">Add Skill</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="submit-form" action="/users/<%= profile._id %>/skills" method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="name" required>
+                <label for="name">Skill Name:</label>
+              </div>
+              <div class="form-floating row mb-3">
+                  <div class="col-4">
+                      <label for="title">Skill Profeciency:</label>
+                  </div>
+                  <div class="col-8">
+                      <select name="profeciency">
+                          <option value="">Select One</option>
+                          <option value=">1 year">>1 year</option>
+                          <option value="1-5 years">1-5 years</option>
+                          <option value="5-10 years">5-10 years</option>
+                          <option value="10+ years">10+ years</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Skill</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="addEducation" tabindex="-1" aria-labelledby="addEducation" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addEducation">Add Education</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="submit-form" action="/users/<%= profile._id %>/education" method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="school" required>
+                <label for="school">School Name:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="month" class="form-control" id="floatingInput" name="start" required>
+                <label for="start">Started:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="month" class="form-control" id="floatingInput" name="end" required>
+                <label for="end">Graduation:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="fieldOfStudy" required>
+                <label for="fieldOfStudy">Field Of Study:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="degree" required>
+                <label for="degree">Degree:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea type="text" class="form-control" id="floatingInput" name="description" required></textarea>
+                <label for="description">Description:</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Education</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="addExperience" tabindex="-1" aria-labelledby="addExperience" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addExperience">Add Experience</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="submit-form" action="/users/<%= profile._id %>/experiences" method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="company" required>
+                <label for="company">Company:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="position" required>
+                <label for="position">Position:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="month" class="form-control" id="floatingInput" name="start" required>
+                <label for="start">Start Date:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="month" class="form-control" id="floatingInput" name="end" required>
+                <label for="end">End Date:</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea type="text" class="form-control" id="floatingInput" name="description" required></textarea>
+                <label for="description">Description:</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Experience</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 <main>
     <div class="floating-container">
         <img src="<%= profile.avatar %> " alt="...">
@@ -31,7 +148,19 @@
         <% if (profile.additionalInfo) { %>
             <h4>Additional Information: <%= profile.additionalInfo %></h4>
         <% } %>
-            
+        <% if (profile._id.equals(user?.profile._id)) {%> 
+        <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkill">
+                Add Skill
+            </button>          
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEducation">
+                Add Education
+            </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExperience">
+                Add Experience
+            </button>               
+        </div>
+        <% } %> 
         <form action="/users/<%=  %> " method="post"></form>
         <% if (profile.hiringStatus === "Hiring" || profile.hiringStatus === "") { %>
             <h3>Jobs Posted by the User:</h3>

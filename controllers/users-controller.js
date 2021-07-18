@@ -8,6 +8,14 @@ export {
     edit,
     update,
     newSkill,
+    newExperience,
+    newEducation,
+    editEducation,
+    editExperience,
+    editSkill,
+    deleteEducation,
+    deleteSkill,
+    deleteExperience,
 }
 
 function show (req, res) {
@@ -102,4 +110,58 @@ function newSkill (req, res) {
         console.log(err)
         res.render("error", {title: "Error", user: req.user ? req.user : null})
     })
+}
+
+function newEducation(req, res) {
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key]
+    }
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        profile.education.push(req.body)
+        profile.save()
+        .then(() => {
+            res.redirect(`/users/${req.user._id}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
+}
+function newExperience(req, res) {
+    for (let key in req.body) {
+        if (req.body[key] === '') delete req.body[key]
+    }
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        profile.experiences.push(req.body)
+        profile.save()
+        .then(() => {
+            res.redirect(`/users/${req.user._id}`)
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
+}
+
+function editSkill (req, res) {
+
+}
+function editExperience (req, res) {
+    
+}
+function editEducation (req, res) {
+    
+}
+function deleteSkill (req, res) {
+    
+}
+function deleteEducation (req, res) {
+    
+}
+function deleteExperience (req, res) {
+    
 }
