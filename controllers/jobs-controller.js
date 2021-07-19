@@ -4,16 +4,16 @@ import { User } from "../models/user.js"
 import { Company } from "../models/company.js"
 
 export {
-    indexJobGet,
-    indexJobPost,
-    jobDetailsDelete,
-    jobDetailsGet,
-    jobPostGet,
-    jobEdit,
-    jobUpdate,
+    index,
+    create,
+    deleteJob as delete,
+    show,
+    newJob as new,
+    edit,
+    update,
 }
 
-function indexJobGet(req,res) {
+function index(req,res) {
     Job.find().sort({ createdAt: -1 })
     .then(result => {
         res.render("jobs/index" , { title: "All Jobs", jobs: result, user: req.user ? req.user : null })
@@ -24,7 +24,7 @@ function indexJobGet(req,res) {
     })
 }
 
-function indexJobPost(req,res) {
+function create(req,res) {
     req.body.userPosted = req.user.profile
     if (req.body.description === "") {
         delete req.body.description
@@ -46,26 +46,16 @@ function indexJobPost(req,res) {
                     profile.save()
                     res.redirect("/jobs")
                 })
-                .catch(err => {
-                    console.log(err)
-                    res.render("error", {title: "Error", user: req.user ? req.user : null})
-                })
             })
-            .catch(err => {
-                console.log(err)
-                res.render("error", {title: "Error", user: req.user ? req.user : null})
-            })        })
-        .catch(err => {
-            console.log(err)
-            res.render("error", {title: "Error", user: req.user ? req.user : null})
-        })    })
+        })
+    })
     .catch(err => {
         console.log(err)
         res.render("error", {title: "Error", user: req.user ? req.user : null})
     })
 }
 
-function jobDetailsGet(req,res) {
+function show(req,res) {
     const id = req.params.id
     Job.findById(id)
     .then(result => {
@@ -77,7 +67,7 @@ function jobDetailsGet(req,res) {
     })
 }
 
-function jobDetailsDelete(req,res) {
+function deleteJob(req,res) {
     const id = req.params.id
 
     Job.findByIdAndDelete(id)
@@ -90,7 +80,7 @@ function jobDetailsDelete(req,res) {
     })
 }
 
-function jobPostGet(req,res) {
+function newJob(req,res) {
     Company.find({})
     .then(companies => {
         Profile.findById(req.user.profile)
@@ -100,12 +90,7 @@ function jobPostGet(req,res) {
                  companies: companies, 
                  user: req.user ? req.user : null,
                  profile: profile
-                })
-
-        })
-        .catch(err => {
-            console.log(err)
-            res.render("error", {title: "Error", user: req.user ? req.user : null})
+            })
         })
     })
     .catch(err => {
@@ -114,7 +99,7 @@ function jobPostGet(req,res) {
     })
 }
 
-function jobEdit(req, res) {
+function edit(req, res) {
     Job.findById(req.params.id)
     .then(job => {
         res.render("jobs/edit", { title: "Edit Job", job: job, user: req.user ? req.user : null })
@@ -124,7 +109,7 @@ function jobEdit(req, res) {
         res.render("error", {title: "Error", user: req.user ? req.user : null})
     })
 }
-function jobUpdate(req, res) {
+function update(req, res) {
     if (req.body.description === "") {
         delete req.body.description
     }

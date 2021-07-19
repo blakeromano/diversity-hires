@@ -79,6 +79,7 @@ function update (req, res) {
     })
 }
 function create (req, res) {
+    console.log(req.body)
     req.body._id = req.params.id
     req.body.userPosted = req.user.profile
     const company = new Company(req.body)

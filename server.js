@@ -49,6 +49,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       sameSite: 'lax',
+      _expires: 600000,
     }
   })
 )

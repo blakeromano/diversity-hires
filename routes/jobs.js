@@ -8,22 +8,22 @@ router.use(methodOverride('_method'))
 
 
 // Jobs pages get
-router.get("/", (req, res) => {jobsController.indexJobGet(req, res)})
+router.get("/", (req, res) => {jobsController.index(req, res)})
 // Handle Posting New Job
-router.post("/", (req, res) => {jobsController.indexJobPost(req, res)})
+router.post("/", (req, res) => {jobsController.create(req, res)})
 
 //new job posting get
-router.get("/post", (req, res) => {jobsController.jobPostGet(req, res)})
+router.get("/post", (req, res) => {jobsController.new(req, res)})
 //job specific page
-router.get("/:id", (req, res) => {jobsController.jobDetailsGet(req,res)})
+router.get("/:id", (req, res) => {jobsController.show(req,res)})
 
 //delete request for job
-router.delete("/:id", (req,res) => {jobsController.jobDetailsDelete(req, res)})
+router.delete("/:id", (req,res) => {jobsController.delete(req, res)})
 
 //get request to edit page
-router.get("/:id/edit", jobsController.jobEdit)
+router.get("/:id/edit", jobsController.edit)
 
 //update a job
-router.put("/:id", jobsController.jobUpdate)
+router.put("/:id", jobsController.update)
 
 export {router}
