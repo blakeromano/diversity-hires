@@ -1,11 +1,14 @@
 nav {
- margin-bottom: 50px;
+    margin-bottom: 50px;
 }
-/* .nav-li {
-    display: inline-block;
-    list-style-type: none;
-    margin-right: 15px;
+#search-bar {
+    width: 400px;
 }
-nav > h1{
-    margin-left: 0px;
-} */
+.navbar-brand-text {
+    color: #e5e5c2;
+    margin-bottom: -20px;
+}
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}

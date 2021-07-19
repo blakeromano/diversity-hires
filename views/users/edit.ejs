@@ -1,5 +1,5 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/jobs/create-style.css">
+<link rel="stylesheet" href="/stylesheets/route-styles/create-style.css">
 <%- include('../partials/nav') %>
 
 <main>
@@ -30,13 +30,11 @@
         <textarea class="form-control" id="floatingInput" name="additionalInfo"><%= profile.additionalInfo %></textarea>
         <label for="additionalInfo">Additional Information:</label>
       </div>
-      <label class="select-label">Hiring Status:</label>
+      <label class="select-label">Are you a Recruiter?</label>
       <select name="hiringStatus" id="">
-          <option value="">Select One</option>
-          <option value="Hiring">Hiring</option>
-          <option value="Not Hiring">Not Hiring</option>
-          <option value="Actively Job Seeking">Actively Job Seeking</option>
-          <option value="Not Actively Job Seeeking">Not Actively Job Seeking</option>
+          <option value="">No</option>
+          <option value="Recruiter">Yes</option>
+
       </select>
       <label class="select-label">Willing to Relocate?</label>
       <select name="relocation" id="">
