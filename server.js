@@ -14,7 +14,7 @@ const app = express()
 // aws testing
 
 app.post("/images", function (req, res) {
-  
+
 })
 
 
@@ -57,7 +57,6 @@ app.use(
     saveUninitialized: false,
     cookie: {
       sameSite: 'lax',
-      _expires: 600000,
     }
   })
 )
