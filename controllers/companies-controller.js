@@ -3,6 +3,8 @@ import { Job } from "../models/job.js"
 import { Review } from "../models/company.js"
 import { Profile } from "../models/profile.js"
 
+
+
 export {
     newCompany as new,
     index,
@@ -16,13 +18,21 @@ export {
 }
 
 function newCompany (req, res) {
-    res.render("companies/create", { title: "New Company", user: req.user ? req.user : null })
+    Profile.findById(req.user.profile)
+    .then(profile => {
+        res.render("companies/create", {
+            title: "New Company", 
+            user: req.user ? req.user : null,
+            profile: profile,
+        })
+    })
 }
 function show (req, res) {
     Company.findById(req.params.id)
     .populate("jobs")
     .populate("reviews.userPosted")
     .then((company) => {
+        console.log(company.reviews[0].userPosted)
         res.render("companies/show", {
             title: "Company Details",
             company: company,
@@ -91,7 +101,6 @@ function create (req, res) {
     })
 }
 function search(req, res) {
-
     if (req.body.searchParam === "jobs") {
         Job.find({ title: req.body.searchContent})
         .then(jobs => {
@@ -115,7 +124,7 @@ function search(req, res) {
 }
 
 function createReview(req, res) {
-    req.body.userPosted = req.user.profile
+    req.body.userPosted = req.user._id
     if (req.body.rating === "") delete req.body.rating
     req.body.rating = parseInt(req.body.rating)
     Company.findById(req.params.id)

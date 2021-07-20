@@ -4,6 +4,7 @@ import { User } from "../models/user.js"
 import { Company } from "../models/company.js"
 
 export {
+    index,
     show,
     edit,
     update,
@@ -15,11 +16,29 @@ export {
     deleteExperience,
 }
 
+function index (req, res) {
+    Profile.find({})
+    .then(profiles => {
+        Profile.findById(req.user.profile)
+        .then(curProfile => {
+            res.render("users/index", {
+                profiles: profiles,
+                title: "All Users",
+                curProfile: curProfile,
+                user: req.user ? req.user : null,
+            })
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
+}
+
 function show (req, res) {
-    User.findById(req.params.id)
-    .then(user => {
-        Profile.findById(user.profile)
-        .populate("jobsPosted")
+    Profile.findById(req.params.id)
+    .then(prof => {
+        prof.populate("jobsPosted")
         .exec()
         .then(profile => {
             Profile.find({_id: {$nin: profile.jobsPosted}})
@@ -32,14 +51,6 @@ function show (req, res) {
                     user: req.user ? req.user: null,
                 })
             })
-            .catch(err => {
-                console.log(err)
-                res.render("error", {title: "Error", user: req.user ? req.user : null})
-            })
-        })
-        .catch(err => {
-            console.log(err)
-            res.render("error", {title: "Error", user: req.user ? req.user : null})
         })
     })
     .catch(err => {
@@ -52,19 +63,12 @@ function edit (req, res) {
     for (let key in req.body) {
         if (req.body[key] === '') delete req.body[key]
     }    
-    User.findById(req.user)
-    .then(user => {
-        Profile.findById(user.profile)
+    Profile.findById(req.user.profile)
         .then(profile => {
             res.render("users/edit", {
-                title: "Edit Profile",
-                profile: profile,
-                user: req.user ? req.user: null,
-            })
-        })
-        .catch(err => {
-            console.log(err)
-            res.render("error", {title: "Error", user: req.user ? req.user : null})
+            title: "Edit Profile",
+            profile: profile,
+            user: req.user ? req.user: null,
         })
     })
     .catch(err => {
@@ -74,16 +78,9 @@ function edit (req, res) {
 }
 
 function update (req, res) {
-    User.findById(req.user)
-    .then(user => {
-        Profile.findByIdAndUpdate(user.profile, req.body, {new: true})
-        .then(profile => {
-            res.redirect(`/users/${user._id}`)
-        })
-        .catch(err => {
-            console.log(err)
-            res.render("error", {title: "Error", user: req.user ? req.user : null})
-        })
+    Profile.findByIdandUpdate(req.user.profile, req.body, {new: true})
+    .then(profile => {
+        res.redirect(`/users/${req.user.profile._id}`)
     })
     .catch(err => {
         console.log(err)
@@ -100,7 +97,7 @@ function newSkill (req, res) {
         profile.skills.push(req.body)
         profile.save()
         .then(() => {
-            res.redirect(`/users/${req.user._id}`)
+            res.redirect(`/users/${req.user.profile._id}`)
         })
     })
     .catch(err => {
@@ -118,7 +115,7 @@ function newEducation(req, res) {
         profile.education.push(req.body)
         profile.save()
         .then(() => {
-            res.redirect(`/users/${req.user._id}`)
+            res.redirect(`/users/${req.user.profile._id}`)
         })
     })
     .catch(err => {
@@ -135,7 +132,7 @@ function newExperience(req, res) {
         profile.experiences.push(req.body)
         profile.save()
         .then(() => {
-            res.redirect(`/users/${req.user._id}`)
+            res.redirect(`/users/${req.user.profile._id}`)
         })
     })
     .catch(err => {
@@ -150,7 +147,7 @@ function deleteSkill (req, res) {
         profile.skills.remove({_id: req.params.id})
         profile.save()
         .then(() => {
-            res.redirect(`/users/${req.user._id}`)
+            res.redirect(`/users/${req.user.profile._id}`)
         })
     })
     .catch(err => {
@@ -164,7 +161,7 @@ function deleteEducation (req, res) {
         profile.education.remove({_id: req.params.id})
         profile.save()
         .then(() => {
-            res.redirect(`/users/${req.user._id}`)
+            res.redirect(`/users/${req.user.profile._id}`)
         })
     })
     .catch(err => {
@@ -178,7 +175,7 @@ function deleteExperience (req, res) {
         profile.experiences.remove({_id: req.params.id})
         profile.save()
         .then(() => {
-            res.redirect(`/users/${req.user._id}`)
+            res.redirect(`/users/${req.user.profile._id}`)
         })
     })
     .catch(err => {

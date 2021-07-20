@@ -1,0 +1,32 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/route-styles/index-style.css">
+<%- include('../partials/nav') %>
+
+<main class="main-index">
+    <% let userInterval = 0 %> 
+    <% if (users.length > 0) { %>
+        <% users.forEach(u => { %>
+            <% if (userInterval % 2 === 0) { %>
+                <div class="row"> 
+            <% } %>
+            <div class="col-md-6 p-0">
+              <div class="card bg-dark card-dark">
+                  <a href="/jobs/<%= job._id %>">
+                      <div class = "card-body">
+                          <h2 class="card-title"><%=job.company  %> </h2>
+                          <h3 class="card-text"><%=job.title %> </h3>
+                      </div>
+                  </a>
+                </div>
+            </div>
+        <% if (userInterval % 2 === 1) { %>
+        </div> 
+        <% } %>
+        <% userInterval ++ %> 
+    <% }) %>
+<% } else { %>
+    <h1 class="no-jobs-available">There are no Users!</h1>
+<% } %> 
+</main>
+
+<%- include('../partials/footer') %>

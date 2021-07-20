@@ -1,7 +1,46 @@
 <%- include('../partials/html-head') %>
 <link rel="stylesheet" href="/stylesheets/route-styles/show-style.css">
 <%- include('../partials/nav') %>
-
+<div class="modal" id="addReview" tabindex="-1" aria-labelledby="addReview" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addReview">Add Review</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="submit-form" action="/companies/<%= company._id %>/reviews" method="POST">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" name="title" required />
+                <label for="title">Review title:</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea type="text" class="form-control" id="floatingInput" name="content" required></textarea>
+                <label for="content">Review Details:</label>
+            </div>
+              <div class="form-floating row mb-3">
+                  <div class="col-4">
+                      <label for="title">Rating:</label>
+                  </div>
+                  <div class="col-8">
+                      <select name="rating">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                      </select>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Review</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <main>
     <div class="floating-container">
         <h1><%= company.companyName %></h1>
@@ -27,31 +66,18 @@
                 <h5><%= review.userPosted.name %></h5>
            <% }) %> 
         <% } %> 
-        <h2>Have you worked for <%= company.companyName %>? Leave a Review!</h2>
-        <form action="/companies/<%= company._id %>/reviews" method="POST">
-            <h2>Post a Review</h2>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" name="title" required>
-                <label for="title">Review Title:</label>
-              </div>
-              <div class="form-floating mb-3">
-                <textarea type="text" class="form-control" id="floatingInput" name="content" required></textarea>
-                <label for="content">Review Content:</label>
-              </div>
-              <div class="form-floating mb-3">
-                <select name="rating" id="">
-                    <option value="">Select a Rating</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-              </div>            
-            <div class="btn-div">
-              <button class="btn btn-lg btn-secondary" type="submit">Submit Review</button>
+        <% if (user) { %>
+            <div class="row">
+                <div class="col-10">
+                    <h2>Have you worked for <%= company.companyName %>? Leave a Review!</h2>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReview">
+                        Add Review
+                    </button>
+                </div>
             </div>
-            </form>
+        <% } %>
         <% if (company.userPosted.equals(user?.profile._id)) { %>
             <div class="floating-container row ">
                 <form class="col-6 floating-container justify-content-center" action="/companies/<%= company._id %>/edit" method="GET">

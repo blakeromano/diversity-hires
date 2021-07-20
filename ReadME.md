@@ -1,2 +1,5 @@
 # Diversity Hires
-## Introduction
+## Purpose
+### Companies have come to see how important it is to have diverse employees working in all aspects of the company. There is lots of data to examine at how a diverse work base increases productivity, effictiveness and can increase the moral of the team. Job searching platforms have yet to adapt to this change in companies and don't give companies the platform to find diverse and talented employees. This is where Diversity Hires aims to give companies and diverse and talented canidates a platform to connect and help the company find some of the best talent that will have a truly positive impact on their work dynamics, also helping the canidates find amazing companies to work with!
+## Instructions for Use
+### The user will first arrive at a Home page where they can read some basic information about Diversity Hires. The user then can press the hamburger menu and get access to all the jobs posted, companies on the site, the about us page. The user will also have access to login with google and search for a company or job in the hamburger menu. If the user logins they will be sent to google to login with their google account, once logged in they will be redirected to

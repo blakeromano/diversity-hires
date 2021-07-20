@@ -1,8 +1,12 @@
+
 import { Router } from 'express'
 import * as companiesController from "../controllers/companies-controller.js"
 export {
   router
 }
+
+
+
 
 const router = Router()
 router.get('/', companiesController.index)
