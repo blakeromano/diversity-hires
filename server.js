@@ -13,9 +13,9 @@ import passport from 'passport'
 const app = express()
 // aws testing
 
-app.post("/images", function (req, res) {
+// app.post("/images", function (req, res) {
 
-})
+// })
 
 
 

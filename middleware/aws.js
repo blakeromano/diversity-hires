@@ -10,4 +10,4 @@ const storage = multer.diskStorage({
 
 const localUploadDocument = multer({storage}).single("document")
 
-const upload2S3 = ()
+const upload2S3
