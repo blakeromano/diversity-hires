@@ -83,8 +83,9 @@ function deleteJob(req,res) {
 function newJob(req,res) {
     Company.find({})
     .then(companies => {
-        Profile.findById(req.user.profile)
+        Profile.findById(req.user.profile._id)
         .then(profile => {
+            console.log(profile)
             res.render("jobs/create", {
                  title: "Post Job", 
                  companies: companies, 

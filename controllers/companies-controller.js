@@ -32,7 +32,6 @@ function show (req, res) {
     .populate("jobs")
     .populate("reviews.userPosted")
     .then((company) => {
-        console.log(company.reviews[0].userPosted)
         res.render("companies/show", {
             title: "Company Details",
             company: company,
@@ -81,6 +80,7 @@ function update (req, res) {
     req.body.userPosted = req.user.profile
     Company.findByIdAndUpdate(req.params.id, req.body, {new: true})
     .then(company => {
+        console.log(company)
         res.redirect(`/companies/${company._id}`)
     })
     .catch(err => {

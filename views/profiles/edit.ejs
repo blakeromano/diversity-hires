@@ -4,8 +4,12 @@
 
 <main>
   <% if (profile._id.equals(user?.profile.id)) { %> 
-    <form action="/users/<%= user._id %>?_method=PUT" method="POST">
+    <form action="/profiles/<%= profile._id %>?_method=PUT" method="POST">
       <h1>Edit your Profile:</h1>
+      <div class="form-floating mb-3">
+        <input value="<%= profile.email %>" type="email" class="form-control" id="floatingInput" name="email" >
+        <label for="email">Email:</label>
+      </div>
       <div class="form-floating mb-3">
         <input value="<%= profile.location %>"type="text" class="form-control" id="floatingInput" name="location" >
         <label for="location">Location:</label>

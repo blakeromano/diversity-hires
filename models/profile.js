@@ -61,6 +61,9 @@ const experienceSchema = new mongoose.Schema({
 const profileSchema = new mongoose.Schema({
   name: String,
   avatar: String,
+  email: {
+    type: String,
+  },
   hiringStatus: {
     type: String,
     enum: ["Recruiter", ""],
@@ -82,7 +85,6 @@ const profileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Job"
   }],
-  user: {type: mongoose.Schema.Types.ObjectId, ref:"User"}
 }, {
   timestamps: true
 })

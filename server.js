@@ -23,7 +23,7 @@ import { router as indexRouter } from './routes/index.js'
 import { router as authRouter } from './routes/auth.js'
 import { router as jobsRouter } from "./routes/jobs.js"
 import { router as companiesRouter } from "./routes/companies.js"
-import { router as usersRouter } from "./routes/users.js"
+import { router as profilesRouter } from "./routes/profiles.js"
 // view engine setup
 app.set(
   'views',
@@ -64,7 +64,7 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use("/jobs", jobsRouter)
 app.use("/companies", companiesRouter)
-app.use("/users", usersRouter)
+app.use("/profiles", profilesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

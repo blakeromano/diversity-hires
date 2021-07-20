@@ -10,7 +10,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="submit-form" action="/users/<%= profile._id %>/skills" method="POST">
+          <form class="submit-form" action="/profiles/<%= profile._id %>/skills" method="POST">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="name" required>
                 <label for="name">Skill Name:</label>
@@ -46,7 +46,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="submit-form" action="/users/<%= profile._id %>/education" method="POST">
+          <form class="submit-form" action="/profiles/<%= profile._id %>/education" method="POST">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="school" required>
                 <label for="school">School Name:</label>
@@ -88,7 +88,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form class="submit-form" action="/users/<%= profile._id %>/experiences" method="POST">
+          <form class="submit-form" action="/profiles/<%= profile._id %>/experiences" method="POST">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" name="company" required>
                 <label for="company">Company:</label>
@@ -123,7 +123,9 @@
     <div class="floating-container">
         <img src="<%= profile.avatar %> " alt="...">
         <h1><%= profile.name %></h1>
-        <h3>Email: <a target="_blank" href="mailto:<%= userProfile.email %>"><%= userProfile.email %></a></h3>
+        <% if (profile.email) { %>
+          <h3>Email: <a target="_blank" href="mailto:<%= profile.email %>"><%= profile.email %></a></h3>
+        <% } %>
         <% if (profile.website) { %>
             <h4>Website: <a target="_blank" href="<%= profile.website %>"><%= profile.website %></a></h4>
         <% } %>
@@ -157,7 +159,7 @@
                     </div>
                     <% if (profile._id.equals(user?.profile._id)) { %>
                         <div class="col-2">
-                        <form action="/users/<%= user._id %>/skills/<%= skill._id %>?_method=DELETE" method="post">
+                        <form action="/profiles/<%= profile._id %>/skills/<%= skill._id %>?_method=DELETE" method="post">
                             <button type="submit" class="button btn-danger">
                                 X
                             </button>
@@ -180,7 +182,7 @@
                     </div>
                     <% if (profile._id.equals(user?.profile._id)) { %>
                         <div class="col-2">
-                            <form action="/users/<%= user._id %>/education/<%= ed._id %>?_method=DELETE" method="post">
+                            <form action="/profiles/<%= profile._id %>/education/<%= ed._id %>?_method=DELETE" method="post">
                             <button type="submit" class="button btn-danger">
                                 X
                             </button>
@@ -201,7 +203,7 @@
                     </div>
                     <% if (profile._id.equals(user?.profile._id)) { %>
                         <div class="col-2">
-                        <form action="/users/<%= user._id %>/experiences/<%= exp._id %>?_method=DELETE" method="post">
+                        <form action="/profiles/<%= profile._id %>/experiences/<%= exp._id %>?_method=DELETE" method="post">
                             <button type="submit" class="button btn-danger">
                                 X
                             </button>
@@ -229,7 +231,7 @@
                 </button>
             </div>
             <div class="col-3">
-                <form class="floating-container justify-content-center" action="/users/<%= user._id %>/edit" method="GET">
+                <form class="floating-container justify-content-center" action="/profiles/<%= profile._id %>/edit" method="GET">
                     <button class="btn btn-primary" type="submit">Update Profile</button>
                 </form>               
             </div>
