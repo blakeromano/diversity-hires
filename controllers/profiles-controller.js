@@ -69,8 +69,8 @@ function edit (req, res) {
 }
 
 function update (req, res) {
-    Profile.findOneAndUpdate({_id: req.user.profile._id}, req.body, {new: true})
-    .then((profile) => {
+    Profile.findByIdAndUpdate(req.user.profile._id, req.body, {new: true})
+    .then(() => {
         res.redirect(`/profiles/${req.user.profile._id}`)
     })
     .catch(err => {
