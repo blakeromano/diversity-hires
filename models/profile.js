@@ -8,7 +8,6 @@ const skillSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   profeciency: {
     type: String,
