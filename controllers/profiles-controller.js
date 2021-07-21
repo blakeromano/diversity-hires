@@ -17,22 +17,18 @@ export {
 }
 
 function index (req, res) {
-    // Profile.find({})
-    // .then(profiles => {
-    //     Profile.findById(req.user.profile)
-    //     .then(curProfile => {
-    //         res.render("users/index", {
-    //             profiles: profiles,
-    //             title: "All Users",
-    //             curProfile: curProfile,
-    //             user: req.user ? req.user : null,
-    //         })
-    //     })
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    //     res.render("error", {title: "Error", user: req.user ? req.user : null})
-    // })
+    Profile.find({})
+    .then(profiles => {
+        res.render("profiles/index", {
+            profiles: profiles,
+            title: "All Users",
+            user: req.user ? req.user : null,
+        })
+    })
+    .catch(err => {
+        console.log(err)
+        res.render("error", {title: "Error", user: req.user ? req.user : null})
+    })
 }
 
 function show (req, res) {

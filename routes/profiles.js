@@ -4,6 +4,7 @@ import { Router } from 'express'
 const router = Router()
 export {router}
 
+router.get("/", profilesController.index)
 router.get("/:id", profilesController.show)
 router.get("/:id/edit", profilesController.edit)
 router.put("/:id", profilesController.update)
