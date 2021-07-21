@@ -7,3 +7,6 @@
 body{
     background-color: rgb(33, 38, 41);
 }
+.no-jobs-available {
+    color:white
+}
