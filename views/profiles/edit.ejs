@@ -36,14 +36,27 @@
       </div>
       <label class="select-label">Are you a Recruiter?</label>
       <select name="hiringStatus" id="">
+        <% if(profile.hiringStatus === "") { %> 
           <option value="">No</option>
           <option class="recruiter-opt" value="Recruiter">Yes</option>
+        <% } else { %> 
+          <option class="recruiter-opt" value="Recruiter">Yes</option>
+          <option value="">No</option>
+        <% } %> 
       </select>
       <label class="select-label">Willing to Relocate?</label>
       <select name="relocation" id="">
-          <option value="">Select One</option>
+        <% if (profile.relocation === "Yes") { %>
           <option class="yes-relocation" value="Yes">Yes</option>
           <option class="no-relocation" value="No">No</option>
+          <% } else if (profile.relocation === "No"){ %>
+            <option class="no-relocation" value="No">No</option>
+            <option class="yes-relocation" value="Yes">Yes</option>
+            <% } else {%>
+              <option value="">Select One</option>
+              <option class="yes-relocation" value="Yes">Yes</option>
+              <option class="no-relocation" value="No">No</option>
+          <% } %> 
       </select>
       <div class="btn-div">
         <button class="btn btn-lg btn-secondary" type="submit">Submit</button>

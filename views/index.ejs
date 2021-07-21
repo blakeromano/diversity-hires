@@ -2,21 +2,71 @@
 <link rel="stylesheet" href="/stylesheets/index-style.css">
 <%- include('./partials/nav') %>
 
-<main class="container-fluid justify-content-center">
-    <div class="row floating-container">
-    </div>
-    <div class="row floating-container">
-        <div class=" mx-4 col-6">
-            <img class="img-fluid rounded"src="/images/index/man-1351761_1280.png" alt="A person being interviewed for a job">
-        </div>
-        <div class="col-5">
-            <h5>Diversity Hires is a company looking to help you find you're next career! Let us help you find your next best career! We believe that a diverse work enviorment is the best kind and we aim to help companies find amazing and talented diverse canidiates!</h5>
+<main class="">
+    <div class="d-flex justify-content-center row container-fluid">
+        <div class="">
+            <img class="img-fluid rounded" height="400" width="800" src="/images/index/office-2009693_1920.jpg" alt="A person being interviewed for a job">
         </div>
     </div>
-    <!-- <form action="/images" method="post">
-        <input type="file" name="image" id="image">
-        <button type="submit">Submit</button>
-    </form> -->
+    <div class="row container-fluid">
+        <div class="">
+            <p class="my-3">
+                Diversity Hires is a Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus tempore vel error sunt minus vitae quod. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla minus voluptatem voluptates deserunt aliquam quasi, impedit, dicta ipsum dolores ullam porro eaque quod est a!
+            </p>
+        </div>
+    </div>
+    <div class="my-5 row justify-content-center container-fluid">
+        <div>
+            <h2 class="text-center">Recent Activity</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h3 class="text-center">New Companies</h3>
+                <% companies.forEach(company => { %>
+                    <div class="p-0">
+                      <div class="card bg-dark card-dark">
+                          <a href="/company/<%= company._id %>">
+                              <div class = "card-body">
+                                  <h3 class="card-title"><%= company.companyName  %></h3>
+                                  <h5 class="card-text"><%= company.industry %></h5>
+                              </div>
+                          </a>
+                        </div>
+                    </div>
+            <% }) %>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center">New Jobs</h3>
+            <% jobs.forEach(job => { %>
+                <div class="p-0">
+                  <div class="card bg-dark card-dark">
+                      <a href="/jobs/<%= job._id %>">
+                          <div class = "card-body">
+                              <h5 class="card-title"><%= job.title  %></h5>
+                              <h6 class="card-text"><%= job.company %></h6>
+                          </div>
+                      </a>
+                    </div>
+                </div>
+        <% }) %>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center">New Users</h3>
+            <% profiles.forEach(profile => { %>
+                <div class="p-0">
+                  <div class="card bg-dark card-dark">
+                      <a href="/profiles/<%= profile._id %>">
+                          <div class = "card-body">
+                            <img src="<%= profile.avatar %>" alt="" class="img-fluid rounded-circle">
+                              <h5 class="card-title"><%= profile.name  %></h5>
+                          </div>
+                      </a>
+                    </div>
+                </div>
+        <% }) %>
+        </div>
+    </div>
 </main>
 
 <%- include('./partials/footer') %>

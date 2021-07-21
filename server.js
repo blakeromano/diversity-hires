@@ -11,13 +11,6 @@ import passport from 'passport'
 
 // create the express app
 const app = express()
-// aws testing
-
-// app.post("/images", function (req, res) {
-
-// })
-
-
 
 // connect to MongoDB with mongoose
 import('./config/database.js')
