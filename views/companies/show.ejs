@@ -42,37 +42,41 @@
     </div>
   </div>
 <main>
-    <div class="floating-container">
-        <h1><%= company.companyName %></h1>
-        <h2><%= company.industry %> </h2>
-        <h2><%= company.missionStatement %> </h2>
-        <h3>Located in: <%= company.location %> </h3>
-        <h3>Description of Company:</h3>
-        <p class="job-desc"><%= company.description %> </p>
-        <h3 class="">Current CEO: <%= company.ceo %> </h3>
-        <h3>Founded in: <%= company.founded %> </h3>
+    <div class="text-center floating-container">
+        <h1 class="my-3"><%= company.companyName %></h1>
+        <h2 class="my-3">Industry: <%= company.industry %> </h2>
+        <h2 class="my-3">Mission Statement: <%= company.missionStatement %> </h2>
+        <h3 class="my-3">Located in: <%= company.location %> </h3>
+        <h3 class="my-3">Current CEO: <%= company.ceo %> </h3>
+        <h3 class="my-3">Founded in: <%= company.founded %> </h3>
+        <h3 class="mt-3">Description of Company:</h3>
+        <p class="job-desc mb-5"><%= company.description %> </p>
+    </div>
+    <% if (company.jobs.length) { %>
         <h3>Jobs Available at <%= company.companyName %>:</h3>
-        <% company.jobs.map(job => { %>
-            <a href="/jobs/<%= job._id %>"><h5><%= job.title %> </h5></a>
-        <% }) %> 
+            <% company.jobs.map(job => { %>
+                <a href="/jobs/<%= job._id %>"><h5><%= job.title %></h5></a>
+                <% }) %> 
+        <% } %>
+
         <h2>Company Reviews:</h2>
         <% if (company.reviews.length === 0) { %> 
-            <h4>There are no reviews for this company yet!</h4>
+            <h4 class="mb-5">There are no reviews for this company yet!</h4>
         <% } else { %> 
            <% company.reviews.map(review => { %>
                 <h3><%= review.title %> </h3>
                 <h4>Rating: <%= review.rating %></h4>
                 <h5><%= review.content %></h5>
-                <h5><%= review.userPosted.name %></h5>
+                <h5><a href="/profiles/<%= review.userPosted._id %>"><%= review.userPosted.name %></a></h5>
            <% }) %> 
         <% } %> 
         <% if (user) { %>
             <div class="row">
                 <div class="col-10">
-                    <h2>Have you worked for <%= company.companyName %>? Leave a Review!</h2>
+                    <h2 class="mt-5">Have you worked for <%= company.companyName %>? Leave a Review!</h2>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReview">
+                    <button type="button" class="btn btn-primary mt-5" data-bs-toggle="modal" data-bs-target="#addReview">
                         Add Review
                     </button>
                 </div>

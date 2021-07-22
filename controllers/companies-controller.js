@@ -124,7 +124,7 @@ function search(req, res) {
 }
 
 function createReview(req, res) {
-    req.body.userPosted = req.user._id
+    req.body.userPosted = req.user.profile._id
     if (req.body.rating === "") delete req.body.rating
     req.body.rating = parseInt(req.body.rating)
     Company.findById(req.params.id)
