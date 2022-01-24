@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: CDNievas/heroku-action@v1.0 # This is the action
+      - name: Deploy to Heroku
+        uses: behe/heroku-build@v1
         with:
-          heroku_email: "blakeromano19@gmail.com"
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "diversity-hires"
-          useforce: true
+          app-name: "diversity-hires"
+          api-key: "${{secrets.HEROKU_API_KEY}}"
+
