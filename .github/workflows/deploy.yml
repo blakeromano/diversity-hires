@@ -15,3 +15,4 @@ jobs:
           heroku_email: "blakeromano19@gmail.com"
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "diversity-hires"
+          useforce: true
