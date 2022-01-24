@@ -9,10 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy to Heroku
-        uses: behe/heroku-build@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
+        id: heroku
+        uses: jctaveras/heroku-deploy@v1.0.0  # use the latest version of the action
         with:
-          app-name: "diversity-hires"
-          api-key: "${{secrets.HEROKU_API_KEY}}"
-
+          email: blakeromano19@gmail.com # your heroku email
+          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+          app_name: 'diversity-hires'
+          dockerfile_path: ''
