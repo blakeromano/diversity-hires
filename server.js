@@ -12,6 +12,8 @@ import passport from 'passport'
 // create the express app
 const app = express()
 
+
+
 // connect to MongoDB with mongoose
 import('./config/database.js')
 
